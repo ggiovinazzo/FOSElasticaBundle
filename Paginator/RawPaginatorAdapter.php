@@ -109,7 +109,8 @@ class RawPaginatorAdapter implements PaginatorAdapterInterface
     public function getTotalHits($genuineTotal = false)
     {
         if (! isset($this->totalHits)) {
-            $this->totalHits = $this->searchable->count($this->query);
+            $countQuery = clone $this->query;
+            $this->totalHits = $this->searchable->count($countQuery);
         }
 
         return $this->query->hasParam('size') && !$genuineTotal
